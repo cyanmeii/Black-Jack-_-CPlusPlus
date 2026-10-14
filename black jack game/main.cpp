@@ -2,8 +2,18 @@
 #include <string>
 #include "game.h"
 
+#ifdef _WIN32
+#include <windows.h> // Для SetConsoleOutputCP
+#endif
 
+/// <summary>
+/// Точка входа в программу.
+/// </summary>
 int main() {
+
+    #ifdef _WIN32
+        SetConsoleOutputCP(65001);
+    #endif
 
     Deck deck;
     Player player;
@@ -12,7 +22,7 @@ int main() {
     initPlayer(&player, "Player");
     initPlayer(&dealer, "Dealer");
 
-    std::cout << "Blackjack ❤︎ ♦︎ ♠︎ ♣︎\n";
+    std::cout << "Blackjack ♦︎ ♠︎ ♣︎\n";
 
     std::string answer;
 
