@@ -3,12 +3,9 @@
 #include "game.h"
 
 #ifdef _WIN32
-#include <windows.h> // Для SetConsoleOutputCP
+#include <windows.h>
 #endif
 
-/// <summary>
-/// Точка входа в программу.
-/// </summary>
 int main() {
 
     #ifdef _WIN32
