@@ -8,10 +8,6 @@
 
 int main() {
 
-    #ifdef _WIN32
-        SetConsoleOutputCP(65001);
-    #endif
-
     Deck deck;
     Player player;
     Player dealer;

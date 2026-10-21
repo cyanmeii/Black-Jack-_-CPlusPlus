@@ -148,12 +148,6 @@ void printRoundResult(const Player& player, const Player& dealer) {
     }
 }
 
-/// <summary>
-/// Проигрывает один раунд игры.
-/// </summary>
-/// <param name="deck">Колода карт</param>
-/// <param name="player">Игрок</param>
-/// <param name="dealer">Дилер</param>
 void playRound(Deck& deck, Player* player, Player* dealer) {
 
     initDeck(deck);
