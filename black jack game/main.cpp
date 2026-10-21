@@ -19,7 +19,7 @@ int main() {
     initPlayer(&player, "Player");
     initPlayer(&dealer, "Dealer");
 
-    std::cout << "Blackjack ♦︎ ♠︎ ♣︎\n";
+    std::cout << "Blackjack\n";
 
     std::string answer;
 

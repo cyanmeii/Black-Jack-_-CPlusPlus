@@ -2,25 +2,9 @@
 
 #include <iostream>
 
-/// <summary>
-/// Логика игры следующая: игроку раздаются две карты,
-/// дилеру раздаются две карты (одна из которых скрыта).
-/// Игрок может выбрать "Hit" (взять еще карту) или "Stand" (остановиться).
-/// Если сумма очков игрока превышает 21, он проигрывает.
-/// После того как игрок завершает свой ход,
-/// дилер открывает свою скрытую карту и берет карты до тех пор,
-/// пока его сумма очков не достигнет 17 или выше.
-/// Побеждает тот, у кого сумма очков ближе к 21, не превышая его. 
-/// </summary>
-
 extern const int MaxScore = 21;
 extern const int DealerLimit = 17;
 
-/// <summary>
-/// Возвращает название ранга карты.
-/// </summary>
-/// <param name="r">Ранг карты</param>
-/// <returns>Название ранга карты</returns>
 static const char* rankName(Rank r) {
 
     switch (r) {
@@ -37,11 +21,6 @@ static const char* rankName(Rank r) {
     }
 }
 
-/// <summary>
-/// Возвращает название масти карты.
-/// </summary>
-/// <param name="s">Масть карты</param>
-/// <returns>Название масти карты</returns>
 static const char* suitName(Suit s) {
 
     switch (s) {
@@ -53,19 +32,11 @@ static const char* suitName(Suit s) {
     }
 }
 
-/// <summary>
-/// Выводит информацию о карте.
-/// </summary>
-/// <param name="card">Карта</param>
 void show(const Card& card) {
 
     std::cout << "[" << rankName(card.rank) << " of " << suitName(card.suit) << "]";
 }
 
-/// <summary>
-/// Выводит информацию о игроке.
-/// </summary>
-/// <param name="player">Игрок</param>
 void show(const Player& player) {
 
     std::cout << player.name << ": ";
@@ -78,11 +49,6 @@ void show(const Player& player) {
     std::cout << "(score: " << player.score << ")\n";
 }
 
-/// <summary>
-/// Выводит информацию о игроке, скрывая вторую карту при необходимости.
-/// </summary>
-/// <param name="player">Игрок</param>
-/// <param name="hideSecond">Флаг, указывающий на необходимость скрытия второй карты</param>
 void show(const Player& player, bool hideSecond) {
 
     if (!hideSecond) {
@@ -97,11 +63,6 @@ void show(const Player& player, bool hideSecond) {
     std::cout << " [hidden]\n";
 }
 
-/// <summary>
-/// Инициализирует игрока.
-/// </summary>
-/// <param name="p">Игрок</param>
-/// <param name="name">Имя игрока</param>
 void initPlayer(Player* p, const std::string& name) {
 
     p->name = name;
@@ -109,11 +70,6 @@ void initPlayer(Player* p, const std::string& name) {
     p->score = 0;
 }
 
-/// <summary>
-/// Добавляет карту к руке игрока.
-/// </summary>
-/// <param name="p">Игрок</param>
-/// <param name="c">Карта</param>
 void addCard(Player* p, Card c) {
 
     if (p->cardsCount < MaxHand) {
@@ -123,12 +79,6 @@ void addCard(Player* p, Card c) {
     }
 }
 
-/// <summary>
-/// Выполняет действие "взять карту" для игрока.
-/// </summary>
-/// <param name="deck">Колода карт</param>
-/// <param name="player">Игрок</param>
-/// <returns></returns>
 bool hitAction(Deck& deck, Player* player) {
 
     Card c = dealCard(deck);
@@ -142,13 +92,6 @@ bool hitAction(Deck& deck, Player* player) {
 
     return true;
 }
-
-/// <summary>
-/// Выполняет действие "остаться" для игрока.
-/// </summary>
-/// <param name="deck">Колода карт</param>
-/// <param name="player">Игрок</param>
-/// <returns></returns>
 bool standAction(Deck&, Player* player) {
 
     std::cout << player->name << " stands.\n";
@@ -156,11 +99,6 @@ bool standAction(Deck&, Player* player) {
     return false;
 }
 
-/// <summary>
-/// Выполняет ход дилера.
-/// </summary>
-/// <param name="deck">Колода карт</param>
-/// <param name="dealer">Дилер</param>
 void dealerTurn(Deck& deck, Player* dealer) {
 
     if (!dealerMustHit(*dealer)) {
@@ -178,17 +116,12 @@ void dealerTurn(Deck& deck, Player* dealer) {
     dealerTurn(deck, dealer);
 }
 
-/// <summary>
-/// Выводит результат раунда.
-/// </summary>
-/// <param name="player">Игрок</param>
-/// <param name="dealer">Дилер</param>
 void printRoundResult(const Player& player, const Player& dealer) {
 
     static int roundsPlayed = 0;
     ++roundsPlayed;
 
-    std::cout << "\n♣︎ Round " << roundsPlayed << " result ♣︎\n";
+    std::cout << "\nRound " << roundsPlayed << " result\n";
 
     show(player);
     show(dealer);
@@ -235,7 +168,7 @@ void playRound(Deck& deck, Player* player, Player* dealer) {
         addCard(dealer, dealCard(deck));
     }
 
-    std::cout << "\nNew round ✰\n";
+    std::cout << "\nNew round\n";
 
     show(*dealer, true);
     show(*player);
